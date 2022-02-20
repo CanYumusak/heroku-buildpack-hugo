@@ -1,0 +1,9 @@
+api = "0.1"
+
+[buildpack]
+id = "dev.yumusak.hugo"
+version = "0.0.1"
+name = "Hugo Buildpack"
+
+[[stacks]]
+id = "heroku-20"
