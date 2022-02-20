@@ -52,6 +52,5 @@ fi
 # Build the site
 echo "\n-----> Building the site"
 cd $BUILD_DIR
-mkdir -p static | indent
-./hugo | indent
+./hugo --source=www | indent
 
