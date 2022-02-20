@@ -39,11 +39,19 @@ fi
 echo "\n-----> Extracting Hugo ${HUGO_VERSION} binaries to ${BUILD_DIR}"
 mkdir -p $CACHE_DIR/$RELEASE_NAME | indent
 tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
+mv $CACHE_DIR/hugo $BUILD_DIR/hugo | indent
+
+# Fetch a theme specified in the .hugotheme file
+if [ -e $BUILD_DIR/.hugotheme ]; then
+  echo "\n-----> Getting the theme"
+  THEME_URL="`cat $BUILD_DIR/.hugotheme`"
+  rm -rf $BUILD_DIR/themes && mkdir $BUILD_DIR/themes && cd $BUILD_DIR/themes
+  git clone $THEME_URL
+fi
 
 # Build the site
-echo $CACHE_DIR
-ls -la
-ls -la $CACHE_DIR
 echo "\n-----> Building the site"
-echo .$CACHE_DIR/hugo
-.$CACHE_DIR/hugo --source=www | indent
+cd $BUILD_DIR
+mkdir -p static | indent
+./hugo | indent
+
