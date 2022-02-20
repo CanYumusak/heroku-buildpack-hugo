@@ -9,7 +9,6 @@ indent() {
   sed $SED_FLAG "$RE"
 }
 
-BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
@@ -42,16 +41,6 @@ mkdir -p $CACHE_DIR/$RELEASE_NAME | indent
 tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
 mv $CACHE_DIR/hugo $BUILD_DIR/hugo | indent
 
-# Fetch a theme specified in the .hugotheme file
-if [ -e $BUILD_DIR/.hugotheme ]; then
-  echo "\n-----> Getting the theme"
-  THEME_URL="`cat $BUILD_DIR/.hugotheme`"
-  rm -rf $BUILD_DIR/themes && mkdir $BUILD_DIR/themes && cd $BUILD_DIR/themes
-  git clone $THEME_URL
-fi
-
 # Build the site
 echo "\n-----> Building the site"
-cd $BUILD_DIR
-mkdir -p static | indent
-./hugo | indent
+./hugo --source=www | indent
