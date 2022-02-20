@@ -41,5 +41,6 @@ mkdir -p $CACHE_DIR/$RELEASE_NAME | indent
 tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
 
 # Build the site
+ls -la $CACHE_DIR
 echo "\n-----> Building the site"
-./$CACHE_DIR/hugo/hugo --source=www | indent
+.$CACHE_DIR/hugo/hugo --source=www | indent
